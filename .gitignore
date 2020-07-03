@@ -1,0 +1,46 @@
+## Project
+dist/*
+
+## Node.js
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+results
+npm-debug.log
+node_modules
+package-lock.json
+
+## Sass
+.sass-cache
+
+# Environment variables, never commit this file
+.env
+
+# VSCode & Webstorm history directories
+.history
+.idea
+
+## OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+## TODO+ Extension For Visual Code
+TODO
