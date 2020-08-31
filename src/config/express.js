@@ -4,7 +4,6 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const handlebars = require('express-handlebars');
-const { errorReporter } = require('express-youch');
 const routes = require('../routes');
 const { logs } = require('./vars');
 
@@ -26,9 +25,6 @@ app.use(cors());
 app.set('views', 'src/views');
 app.engine('.hbs', handlebars({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
-
-// enable beautiful HTML error reports
-app.use(errorReporter());
 
 // mount routes
 app.use('/', routes);
