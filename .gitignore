@@ -42,5 +42,11 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+## Postgres DB Data
+postgres-data
+
+## PG4Admin Data
+pg4admin-data
+
 ## TODO+ Extension For Visual Code
 TODO
