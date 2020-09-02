@@ -1,13 +1,15 @@
 FROM node:lts-alpine
 
-RUN npm install pm2 -g
+RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
 
-RUN npm install
+RUN npm install pm2 -g
 
-COPY . .
+RUN npm install && npm cache clean --force --loglevel=error
+
+COPY --chown=node:node . .
 
 CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
