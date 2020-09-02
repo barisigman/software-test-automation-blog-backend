@@ -43,7 +43,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 ## VSCode
-.vccode/
+.vscode/
 
 ## Postgres DB Data
 postgres-data
