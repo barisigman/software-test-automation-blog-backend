@@ -42,6 +42,9 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+## VSCode
+.vccode/
+
 ## Postgres DB Data
 postgres-data
 
