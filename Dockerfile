@@ -6,6 +6,8 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
+USER node
+
 RUN npm install pm2 -g
 
 RUN npm install && npm cache clean --force --loglevel=error
