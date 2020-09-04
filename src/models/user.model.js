@@ -1,48 +1,59 @@
-module.exports = (sequelize, type) => {
-  return sequelize.define(
-    'user',
-    {
-      id: {
-        type: type.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      uuid: {
-        type: type.UUID,
-        defaultValue: type.UUIDV4,
-        allowNull: false,
-        unique: true,
-      },
-      first_name: {
-        type: type.STRING,
-        allowNull: false,
-      },
-      last_name: {
-        type: type.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: type.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      created_at: {
-        type: type.DATE,
-        defaultValue: type.NOW,
-      },
-      updated_at: {
-        type: type.DATE,
-        defaultValue: type.NOW,
-      },
-      deleted_at: {
-        type: type.DATE,
-        defaultValue: null,
-        allowNull: true,
-      },
+const { DataTypes } = require('sequelize');
+
+const { sequelize } = require('../config/sequelize');
+
+const User = sequelize.define(
+  'users',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-    }
-  );
-};
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      unique: true,
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+      allowNull: true,
+    },
+  },
+  {
+    defaultScope: {
+      attributes: { exclude: ['id', 'password'] },
+    },
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  }
+);
+
+module.exports = { User };
