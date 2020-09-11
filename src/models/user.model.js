@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 const { sequelize } = require('../config/sequelize');
 
@@ -55,5 +56,15 @@ const User = sequelize.define(
     updatedAt: 'updated_at',
   }
 );
+
+User.generateHashedPassword = async function generateHashedPassword(password) {
+  const hashedPassword = await bcrypt.hash(password, 12);
+  return hashedPassword;
+};
+
+User.compareHashedPassword = async function compareHashedPassword(password) {
+  const isVerified = await bcrypt.compare(password, this.password);
+  return isVerified;
+};
 
 module.exports = { User };
