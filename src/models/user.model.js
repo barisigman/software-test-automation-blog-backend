@@ -52,6 +52,7 @@ const User = sequelize.define(
     defaultScope: {
       attributes: { exclude: ['id', 'password'] },
     },
+    charset: 'utf8',
     paranoid: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
