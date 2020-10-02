@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const { sequelize } = require('../config/sequelize');
 
@@ -34,25 +34,13 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    deleted_at: {
-      type: DataTypes.DATE,
-      defaultValue: null,
-      allowNull: true,
-    },
   },
   {
     defaultScope: {
       attributes: { exclude: ['id', 'password'] },
     },
     charset: 'utf8',
+    timestamps: true,
     paranoid: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
@@ -70,4 +58,4 @@ User.compareHashedPassword = async function compareHashedPassword(password) {
   return isVerified;
 };
 
-module.exports = { User };
+module.exports = User;
