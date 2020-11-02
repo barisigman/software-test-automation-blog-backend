@@ -14,8 +14,6 @@ const create = async (req, res) => {
     password: '123456',
   };
 
-  const hashedPassword = await User.generateHashedPassword(userReq.password);
-  userReq.password = hashedPassword;
   const user = await User.create(userReq);
 
   res.render('user', { title: 'User Page', user });

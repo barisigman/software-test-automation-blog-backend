@@ -48,12 +48,21 @@ const User = sequelize.define(
   }
 );
 
-User.generateHashedPassword = async function generateHashedPassword(password) {
-  const hashedPassword = await bcrypt.hash(password, 12);
-  return hashedPassword;
+User.associate = (models) => {
+  User.belongsToMany(models.Role, {
+    through: 'user_role',
+    as: 'roles',
+    foreignKey: 'user_id',
+  });
 };
 
-User.compareHashedPassword = async function compareHashedPassword(password) {
+User.beforeCreate(async (user) => {
+  const hashedPassword = await bcrypt.hash(user.password, 12);
+  const toBeCreatedUser = user;
+  toBeCreatedUser.password = hashedPassword;
+});
+
+User.verifyPassword = async function verifyHashedPassword(password) {
   const isVerified = await bcrypt.compare(password, this.password);
   return isVerified;
 };
