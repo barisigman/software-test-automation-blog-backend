@@ -4,8 +4,8 @@ const Permission = require('../../models/permission.model');
 module.exports = {
   up: async (queryInterface) => {
     const rolePermisson = [];
-    const roles = await Role.findAll({ attributes: { include: 'id' } });
-    const permissions = await Permission.findAll({ attributes: { include: 'id' } });
+    const roles = await Role.findAll();
+    const permissions = await Permission.findAll();
 
     roles.forEach((role) => {
       permissions.forEach((permission) => {
