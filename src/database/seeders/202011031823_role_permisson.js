@@ -8,7 +8,7 @@ module.exports = {
     const permissions = await Permission.findAll({ attributes: { include: 'id' } });
 
     roles.forEach((role) => {
-      permissions.forEach( (permission) => {
+      permissions.forEach((permission) => {
         if (role.name === 'Admin') {
           rolePermisson.push({
             role_id: role.id,
