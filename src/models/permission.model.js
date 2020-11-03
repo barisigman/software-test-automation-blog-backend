@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/sequelize');
 
-const Permissions = sequelize.define(
+const Permission = sequelize.define(
   'permissions',
   {
     id: {
@@ -21,9 +21,6 @@ const Permissions = sequelize.define(
     },
   },
   {
-    defaultScope: {
-      attributes: { exclude: ['id'] },
-    },
     charset: 'utf8',
     timestamps: true,
     paranoid: true,
@@ -33,12 +30,4 @@ const Permissions = sequelize.define(
   }
 );
 
-Permissions.associate = (models) => {
-  Permissions.belongsToMany(models.Role, {
-    through: 'role_permission',
-    as: 'roles',
-    foreignKey: 'permission_id',
-  });
-};
-
-module.exports = Permissions;
+module.exports = Permission;

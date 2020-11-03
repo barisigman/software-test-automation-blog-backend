@@ -1,7 +1,8 @@
 const User = require('../models/user.model');
+const Role = require('../models/role.model');
 
 const index = async (req, res) => {
-  const users = await User.findAll();
+  const users = await User.findAll({ include: 'roles' });
 
   res.render('user', { title: 'User Page', users });
 };

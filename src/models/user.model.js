@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const Role = require('./role.model');
 
 const { sequelize } = require('../config/sequelize');
 
@@ -37,7 +38,7 @@ const User = sequelize.define(
   },
   {
     defaultScope: {
-      attributes: { exclude: ['id', 'password'] },
+      attributes: { exclude: ['password'] },
     },
     charset: 'utf8',
     timestamps: true,
@@ -48,13 +49,23 @@ const User = sequelize.define(
   }
 );
 
-User.associate = (models) => {
-  User.belongsToMany(models.Role, {
-    through: 'user_role',
-    as: 'roles',
-    foreignKey: 'user_id',
-  });
-};
+User.belongsToMany(Role, {
+  through: 'user_role',
+  as: 'roles',
+  foreignKey: {
+    name: 'user_id',
+  },
+  timestamps: false,
+});
+
+Role.belongsToMany(User, {
+  through: 'user_role',
+  as: 'users',
+  foreignKey: {
+    name: 'role_id',
+  },
+  timestamps: false,
+});
 
 User.beforeCreate(async (user) => {
   const hashedPassword = await bcrypt.hash(user.password, 12);

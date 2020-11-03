@@ -14,6 +14,8 @@ module.exports = {
             model: 'users',
             key: 'id',
           },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
           allowNull: false,
         },
         role_id: {
@@ -22,6 +24,8 @@ module.exports = {
             model: 'roles',
             key: 'id',
           },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
           allowNull: false,
         },
       },
