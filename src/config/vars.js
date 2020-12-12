@@ -10,6 +10,11 @@ module.exports = {
   env: process.env.APP_ENV,
   host: process.env.APP_HOST,
   port: process.env.APP_PORT,
+  secret: process.env.APP_SECRET,
+  redisConf: {
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+  },
   postgres: {
     port: process.env.POSTGRES_PORT,
     user: process.env.POSTGRES_USER,

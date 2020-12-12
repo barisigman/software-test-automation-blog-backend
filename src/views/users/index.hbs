@@ -1,0 +1,86 @@
+<div class="container">
+  <h1>Users</h1>
+</div>
+
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-12">
+      <a href="{{route 'users/create' }}" class="btn btn-sm btn-success">
+        <i class="fas fa-user-plus"></i>
+        Create New User
+      </a>
+      <a href="{{route 'users/thrash' }}" class="btn btn-sm btn-danger">
+        <i class="fas fa-user-slash"></i>
+        Thrashed Users
+      </a>
+    </div>
+  </div>
+</div>
+
+{{#if users}}
+<div class="container mb-3">
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th scope="col">UUID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Permissions</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      {{#dataValues}}
+      <tr>
+        <th scope="row">{{uuid}}</th>
+        <td>{{first_name}} {{last_name}}</td>
+        <td>{{email}}</td>
+        <th>
+          {{#each roles}}
+          {{#dataValues}}
+          <span class="badge badge-pill badge-primary">{{name}}</span>
+          {{/dataValues}}
+          {{/each}}
+        </th>
+        <td>
+          {{#each roles}}
+          {{#dataValues}}
+          {{#each permissions}}
+          {{#dataValues}}
+          <span class="badge badge-pill badge-secondary">{{name}}</span>
+          {{/dataValues}}
+          {{/each}}
+          {{/dataValues}}
+          {{/each}}
+        </td>
+        <td>{{updated_at}}</td>
+        <td>
+          <div class="btn-group" role="group">
+            <a href="{{route 'users' id=uuid }}" class="btn btn-sm btn-primary">
+              <i class="fas fa-eye"></i>
+              Show
+            </a>
+            <a href="{{route 'users/edit' id=uuid }}" class="btn btn-sm btn-warning">
+              <i class="fas fa-edit"></i>
+              Edit
+            </a>
+            <a href="{{route 'users/delete' id=uuid }}" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash-alt"></i>
+              Thrash
+            </a>
+          </div>
+        </td>
+      </tr>
+      {{/dataValues}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<div class="container mb-3">
+  <p>No User Found</p>
+</div>
+{{/if}}

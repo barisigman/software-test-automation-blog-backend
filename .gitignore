@@ -46,6 +46,9 @@ $RECYCLE.BIN/
 .vscode/
 
 ## Postgres DB Data
+redis-data
+
+## Postgres DB Data
 postgres-data
 
 ## PG4Admin Data

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>{{user.first_name}} {{user.last_name}} Details</h1>
+</div>
+
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-12">
+      <p>UUID: {{user.uuid}}</p>
+      <p>Name: {{user.first_name}} {{user.last_name}}</p>
+      <p>Email: {{user.email}}</p>
+      {{#each user.roles}}
+      {{#dataValues}}
+      <p>Role: <span class="badge badge-pill badge-primary">{{name}}</span></p>
+      <p>Permissions:
+        {{#each permissions}}
+        {{#dataValues}}
+        <span class="badge badge-pill badge-secondary">{{name}}</span>
+        {{/dataValues}}
+        {{/each}}
+      </p>
+      {{/dataValues}}
+      {{/each}}
+      <p>Created At: {{user.created_at}}</p>
+      <p>Updated At: {{user.updated_at}}</p>
+      <a href="{{route 'users' }}" class="btn btn-primary">
+        <i class="fas fa-arrow-left mr-1"></i>
+        Cancel
+      </a>
+      <a href="{{route 'users/edit' id=user.uuid }}" class="btn btn-success float-right">
+        <i class="fas fa-edit mr-1"></i>
+        Edit User
+      </a>
+    </div>
+  </div>
+</div>

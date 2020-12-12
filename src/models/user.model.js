@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const { startCase } = require('lodash');
 const bcrypt = require('bcryptjs');
 const Role = require('./role.model');
 
@@ -21,10 +22,16 @@ const User = sequelize.define(
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('first_name', startCase(value));
+      },
     },
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('last_name', startCase(value));
+      },
     },
     email: {
       type: DataTypes.STRING,
@@ -71,6 +78,14 @@ User.beforeCreate(async (user) => {
   const hashedPassword = await bcrypt.hash(user.password, 12);
   const toBeCreatedUser = user;
   toBeCreatedUser.password = hashedPassword;
+});
+
+User.beforeUpdate(async (user) => {
+  if (user.password) {
+    const hashedPassword = await bcrypt.hash(user.password, 12);
+    const toBeCreatedUser = user;
+    toBeCreatedUser.password = hashedPassword;
+  }
 });
 
 User.verifyPassword = async function verifyHashedPassword(password) {
